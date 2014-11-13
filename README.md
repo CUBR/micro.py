@@ -11,8 +11,8 @@ How micro.py works
 ------------------
 
 
-Resources
-~~~~~~~~~
+### Resources
+
 
 Resource are the multimedia files (images, sound, music and tile-maps)
 used by your application.  Each resource is identified by a name, resource
@@ -54,8 +54,7 @@ Supported sound and music formats:
 Simple text files (.txt) are used for tile-mapped graphics.
 
 
-Tile-map format example
-^^^^^^^^^^^^^^^^^^^^^^^
+#### Tile-map format example
 
     # '#' and ';' characters mark the begging of a comment.  All comments
     # and white-space are ignored by the tile-map format.
@@ -76,8 +75,7 @@ Tile-map format example
     7,8,8,9
     
 	
-Image configuration format example
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#### Image configuration format example
 
     # The .meta section store information about the image: Tile geometry,
     # and the colour-key (transparent colour).
@@ -109,8 +107,7 @@ Image configuration format example
     frames = 3, 4, 5, 6
     
 	
-Colours
-~~~~~~~
+### Colours
 
 For simplicity all colours in micro.py are specified as strings.  The 
 format used is an extended version of what is available in CSS.  Colours
@@ -129,8 +126,7 @@ An by hsl, hsla style:
     draw_color('hsla(0, 100%, 50%, 0.5)')
     
 	
-Type conversion
-~~~~~~~~~~~~~~~
+### Type conversion
 
 All functions in micro.py have a documented type associated with each 
 parameter.  Be it int, str, bool, etc.  Where possible functions will 
