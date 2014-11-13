@@ -55,86 +55,86 @@ Simple text files (.txt) are used for tile-mapped graphics.
 
 
 #### Tile-map format example
-    ```
-    # '#' and ';' characters mark the begging of a comment.  All comments
-    # and white-space are ignored by the tile-map format.
-    
-    # The first non-blank line should name the image to use as the source
-    # of tiles for this tile-map.
-    tiles = my_tiles
-    
-    # Each subsequent non-blank line is a comma-separated list of either
-    # tile indices, or animation names the the source image has defined.
-    # Zero is used to define a transparent tile.
-    # The following creates a small 4x5 tile-map.
-    0,0,bird,0
-    1,2,2,3
-    4,5,5,6
-    4,5,5,6
-    4,5,5,6
-    7,8,8,9
-    ```
+```
+# '#' and ';' characters mark the begging of a comment.  All comments
+# and white-space are ignored by the tile-map format.
+
+# The first non-blank line should name the image to use as the source
+# of tiles for this tile-map.
+tiles = my_tiles
+
+# Each subsequent non-blank line is a comma-separated list of either
+# tile indices, or animation names the the source image has defined.
+# Zero is used to define a transparent tile.
+# The following creates a small 4x5 tile-map.
+0,0,bird,0
+1,2,2,3
+4,5,5,6
+4,5,5,6
+4,5,5,6
+7,8,8,9
+```
 	
 #### Image configuration format example
-    ```
-    # The .meta section store information about the image: Tile geometry,
-    # and the colour-key (transparent colour).
-    [.meta]
-    # The width and height (in pixels) of each tile in the image.  Defaults
-    # to the total width and height of the image resulting in only one tile
-    # being defined.
-    tile_width   = 16
-    tile_height  = 12
-    
-    # The number of pixels between each tile
-    tile_spacing = 2
-    # The number of pixels that surround the entire tile set.
-    tile_margin  = 10
-    
-    # The transparency colour used in this image.
-    colorkey     = rgb(255, 0, 255)
-    
-    # All subsequent sections define animations available for this image.
-    [animation1]
-    rate   = 10   # The frame rate the animation should run at in fps.
-    loop   = loop # The type of loop the animation should run in.
-    frames = 1, 2 # The index of the tiles to use as the frames of this 
-                  # animation.
-    
-    [animation2]
-    rate   = 20
-    loop   = none
-    frames = 3, 4, 5, 6
-    ```
+```
+# The .meta section store information about the image: Tile geometry,
+# and the colour-key (transparent colour).
+[.meta]
+# The width and height (in pixels) of each tile in the image.  Defaults
+# to the total width and height of the image resulting in only one tile
+# being defined.
+tile_width   = 16
+tile_height  = 12
+
+# The number of pixels between each tile
+tile_spacing = 2
+# The number of pixels that surround the entire tile set.
+tile_margin  = 10
+
+# The transparency colour used in this image.
+colorkey     = rgb(255, 0, 255)
+
+# All subsequent sections define animations available for this image.
+[animation1]
+rate   = 10   # The frame rate the animation should run at in fps.
+loop   = loop # The type of loop the animation should run in.
+frames = 1, 2 # The index of the tiles to use as the frames of this 
+          # animation.
+
+[animation2]
+rate   = 20
+loop   = none
+frames = 3, 4, 5, 6
+```
 	
 ### Colours
 
 For simplicity all colours in micro.py are specified as strings.  The 
 format used is an extended version of what is available in CSS.  Colours
 can be specified by name:
-    ```python
-    draw_color('red')
-    ```
+```python
+draw_color('red')
+```
     
 By hex codes:
-    ```python
-    draw_color('#f00')       # #rgb
-    draw_color('#ff0000')    # #rrggbb
-    draw_color('#f008')      # #rgba
-    draw_color('#ff000080')  # #rrggbbaa
-    ```
+```python
+draw_color('#f00')       # #rgb
+draw_color('#ff0000')    # #rrggbb
+draw_color('#f008')      # #rgba
+draw_color('#ff000080')  # #rrggbbaa
+```
     
 By rgb, rgba style:
-    ```python
-    draw_color('rgb(255, 0, 0)')
-    draw_color('rgba(255, 0, 0, 0.5)')
-    ```
+```python
+draw_color('rgb(255, 0, 0)')
+draw_color('rgba(255, 0, 0, 0.5)')
+```
     
 An by hsl, hsla style:
-    ```python
-    draw_color('hsl(0, 100%, 50%)')
-    draw_color('hsla(0, 100%, 50%, 0.5)')
-    ```
+```python
+draw_color('hsl(0, 100%, 50%)')
+draw_color('hsla(0, 100%, 50%, 0.5)')
+```
 	
 ### Type conversion
 
