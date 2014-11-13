@@ -7,6 +7,18 @@ high-level and simplified interface to SDL's input, audio and graphics
 systems.  Aimed at beginner Python programmers and people in a hurry!
 
 
+Installation
+------------
+
+### Linux
+
+
+### OS X
+
+
+### Windows
+
+
 How micro.py works
 ------------------
 
@@ -147,7 +159,7 @@ that values are converted before being passed to a function to avoid
 surprises.
 
 
-Examples
+Tutorial
 --------
 
 
