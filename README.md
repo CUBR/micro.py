@@ -55,7 +55,7 @@ Simple text files (.txt) are used for tile-mapped graphics.
 
 
 #### Tile-map format example
-
+    ```
     # '#' and ';' characters mark the begging of a comment.  All comments
     # and white-space are ignored by the tile-map format.
     
@@ -73,10 +73,10 @@ Simple text files (.txt) are used for tile-mapped graphics.
     4,5,5,6
     4,5,5,6
     7,8,8,9
-    
+    ```
 	
 #### Image configuration format example
-
+    ```
     # The .meta section store information about the image: Tile geometry,
     # and the colour-key (transparent colour).
     [.meta]
@@ -105,33 +105,36 @@ Simple text files (.txt) are used for tile-mapped graphics.
     rate   = 20
     loop   = none
     frames = 3, 4, 5, 6
-    
+    ```
 	
 ### Colours
 
 For simplicity all colours in micro.py are specified as strings.  The 
 format used is an extended version of what is available in CSS.  Colours
 can be specified by name:
-
+    ```python
     draw_color('red')
+    ```
     
 By hex codes:
-
+    ```python
     draw_color('#f00')       # #rgb
     draw_color('#ff0000')    # #rrggbb
     draw_color('#f008')      # #rgba
     draw_color('#ff000080')  # #rrggbbaa
+    ```
     
 By rgb, rgba style:
-
+    ```python
     draw_color('rgb(255, 0, 0)')
     draw_color('rgba(255, 0, 0, 0.5)')
+    ```
     
 An by hsl, hsla style:
-
+    ```python
     draw_color('hsl(0, 100%, 50%)')
     draw_color('hsla(0, 100%, 50%, 0.5)')
-    
+    ```
 	
 ### Type conversion
 
