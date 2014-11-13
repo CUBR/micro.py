@@ -166,4 +166,56 @@ Tutorial
 API Documentation
 -----------------
 
+### System
 
+<h4>
+<pre><strong>init</strong>(
+    <em>width</em>=320, 
+    <em>height</em>=180, 
+    <em>fullscreen</em>=False, 
+    <em>title</em>=None, 
+    <em>resources_dir</em>=None, 
+    <em>redirect_output</em>=True
+)</pre>
+</h4>
+
+Initialises the micro.py library.
+
+Creates the graphics window and sets various configurations options used
+throughout micro.py's operation.
+
+##### Parameters
+
+`width: int` (greater than zero)<br/>
+	The width of the graphics window.
+
+`height: int` (greater than zero)<br/>
+    The height of the graphics window.
+    
+`fullscreen: bool`<br/>
+    Weather the graphics window should be displayed in fullscreen.
+    
+`title: str`<br/>
+    The title of the graphics window.
+    
+`resources_dir: str` (path to an existing directory)<br/>
+    The directory where resources should be searched for, and loaded from 
+    by micro.py.
+    
+`redirect_output:`<br/>
+    Weather STDOUT should be redirected to the graphics window.  This has
+    the effect of causing Python's built-in print function to render text
+    using micro.py's draw_text function.
+
+##### Raises
+
+`RuntimeError`<br/>
+    If initialisation could not be completed.
+    
+##### Notes
+
+This function doesn't have to be called by programs using micro.py.  All 
+micro.py function test if init() has been called and if not call init() 
+with it's default options.  This means that if init() hasn't been called
+explicitly, any of micro.py's functions could raise the same exceptions as
+init().
