@@ -142,3 +142,13 @@ is not possible or fails a TypeError is raised.  This means all functions
 accepting parameters can raise TypeError's.  It is advisable to ensure 
 that values are converted before being passed to a function to avoid 
 surprises.
+
+
+Examples
+--------
+
+
+API Documentation
+-----------------
+
+
