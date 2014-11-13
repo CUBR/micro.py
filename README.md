@@ -112,16 +112,23 @@ Simple text files (.txt) are used for tile-mapped graphics.
 For simplicity all colours in micro.py are specified as strings.  The 
 format used is an extended version of what is available in CSS.  Colours
 can be specified by name:
+
     draw_color('red')
+    
 By hex codes:
+
     draw_color('#f00')       # #rgb
     draw_color('#ff0000')    # #rrggbb
     draw_color('#f008')      # #rgba
     draw_color('#ff000080')  # #rrggbbaa
+    
 By rgb, rgba style:
+
     draw_color('rgb(255, 0, 0)')
     draw_color('rgba(255, 0, 0, 0.5)')
+    
 An by hsl, hsla style:
+
     draw_color('hsl(0, 100%, 50%)')
     draw_color('hsla(0, 100%, 50%, 0.5)')
     
