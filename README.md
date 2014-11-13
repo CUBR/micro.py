@@ -186,10 +186,10 @@ throughout micro.py's operation.
 
 ##### Parameters
 
-`width: int` (greater than zero)<br/>
+`width: int` <em>(greater than zero)</em><br/>
 	The width of the graphics window.
 
-`height: int` (greater than zero)<br/>
+`height: int` <em>(greater than zero)</em><br/>
     The height of the graphics window.
     
 `fullscreen: bool`<br/>
@@ -198,7 +198,7 @@ throughout micro.py's operation.
 `title: str`<br/>
     The title of the graphics window.
     
-`resources_dir: str` (path to an existing directory)<br/>
+`resources_dir: str` <em>(path to an existing directory)</em><br/>
     The directory where resources should be searched for, and loaded from 
     by micro.py.
     
