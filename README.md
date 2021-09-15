@@ -10,3 +10,5 @@ systems.  Aimed at beginner Python programmers and people in a hurry!
  *  [How micro.py works](https://github.com/jamescox/micro.py/wiki/How-micro.py-works)
  *  [Tutorial](https://github.com/jamescox/micro.py/wiki/Tutorial)
  *  [API documentation](https://github.com/jamescox/micro.py/wiki/API-documentation)
+
+This is a fork of the original project by james cox. He wrote the original software and this is an alteration on it.
