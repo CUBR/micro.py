@@ -18,12 +18,16 @@
 #    misrepresented as being the original software.
 # 3. This notice may not be removed or altered from any source distribution.
 
+# CUBR changes:
+# 15/9/2021- added comments on potential changes
+
 from   ctypes import c_int, byref, addressof
 import re
 
 from .sdl2 import *
 
-
+#potentially rename to gamepad or controller
+#potentially allow for buttons, axes, and the controller itself to have a name
 class Joystick:
     def __init__(self, sdl_joystick):
         self.sdl_joystick = sdl_joystick
@@ -179,11 +183,11 @@ class InputHandler:
         
         self.joysticks = {}
     
-    
+    #potenailly add a public method to give the key name, expand to full keyboard
+    #potentially find a way to have a way to switch between uk and us spellings
     @staticmethod
     def key_name(id):
         name = SDL_GetKeyName(id).decode().lower()
-        
         name = re.sub(r'\s|\\|\.|,|/|\#|\'|;|\[|\]|`|\-|\=|\+|\*', 
             lambda match: {
                 ' ':  '_',             '\\': 'backslash',

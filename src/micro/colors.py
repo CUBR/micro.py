@@ -18,6 +18,9 @@
 #    misrepresented as being the original software.
 # 3. This notice may not be removed or altered from any source distribution.
 
+# CUBR changes:
+# 15/9/2021- added comments on potential changes
+
 from colorsys import hls_to_rgb
 import re
 
@@ -34,7 +37,7 @@ def rgba(r, g, b, a=1.0):
     
     return r, g, b, int(a * 255)
 
-
+#potentially add mirror function to allow for hsv
 def hsla(h, s, l, a=1.0):
     if h < 0 and h > 360:
         raise ValueError('hue component of hsl/hsla color must be between 0 - 360')
@@ -54,6 +57,8 @@ def hsla(h, s, l, a=1.0):
     return int(r * 255), int(g * 255), int(b * 255), int(a * 255)
 
 
+#potentially add capability to add own named colours.
+#potnetially change spelling from color to colour, maybe find a way to use both
 def color_from_name(name):      
     if isinstance(name, str):
         key = name.lower().strip()

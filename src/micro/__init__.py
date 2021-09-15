@@ -18,6 +18,9 @@
 #    misrepresented as being the original software.
 # 3. This notice may not be removed or altered from any source distribution.
 
+# CUBR changes:
+# 15/9/2021- added comments on potential changes
+
 '''
 micro.py - A simple multimedia library inspired by the BASIC functions 
 provided by the micro-computers of the 1980's.  Built on top PySDL2, 
@@ -498,10 +501,10 @@ def __init__():
             
             width           = self.check_param('width', width, integer, greater_than_zero)
             height          = self.check_param('height', height, integer, greater_than_zero)
-            fullscreen      = bool(fullscreen)
+            fullscreen      = bool(fullscreen) #potentially change to check param
             title           = str(title) if title is not None else None
             resources_dir   = self.check_param('resources_dir', resources_dir, str, dir_exists, ignore_none=True)
-            redirect_output = bool(redirect_output)
+            redirect_output = bool(redirect_output) #potentially change to check param
             
             if self.initialised:
                 self.quit()
@@ -510,6 +513,8 @@ def __init__():
             IMG_Init(0)
             TTF_Init()
             Mix_Init(0)
+
+            #reorder assignments to be in same order as params
 
             if title is None:
                 title = os.path.splitext(os.path.basename(sys.argv[0]))[0]
@@ -652,6 +657,7 @@ def __init__():
             return (SDL_GetTicks() / 1000.0) - start
                 
                 
+        #might change the following to parameters
         @public #P
         def background_color(self, color=None):
             '''
@@ -678,7 +684,7 @@ def __init__():
             self.ensure_init()
             
             if color is not None:
-                self.g.background = str(color)
+                self.g.background = str(color) #potentially change to check param
             
             return self.g.background
 
@@ -869,7 +875,6 @@ def __init__():
             int
                 The y location of the graphics cursor.
             '''
-            
             self.ensure_init()
             
             if x is not None:
@@ -896,6 +901,8 @@ def __init__():
             int
                 The x location of the graphics cursor.
             '''
+            #function needs implementing
+
             x, _ = location(x)
             return x
         
@@ -916,6 +923,8 @@ def __init__():
             int
                 The y location of the graphics cursor.
             '''
+            #function needs implementing
+
             _, y = location(y=y)
             return y
             
@@ -977,7 +986,7 @@ def __init__():
                 The name of the image and optionally the animation or frame to render.
                 To specify an animation or frame, simple place a forward slash after 
                 the image name followed by either the frame index of animation name.
-            x: int
+            x: int #potentially add an image parameter to define the center of the image, center parameter
                 The x coordinate of the center of the image to be drawn.
             y: int
                 The y coordinate of the center of the image to be drawn.
@@ -1005,21 +1014,22 @@ def __init__():
             
             self.ensure_init()
 
-            name   = str(name)
+            name   = str(name) #potentially change to check param
             x      = self.check_param('x', x, integer, ignore_none=True)
             y      = self.check_param('y', y, integer, ignore_none=True)
             width  = self.check_param('width', width, integer, ignore_none=True)
             height = self.check_param('height', height, integer, ignore_none=True)
-            flip   = str(flip)
+            flip   = str(flip) #potentially change to check param
             angle  = self.check_param('angle', angle, floating_point)
             time   = self.check_param('time', time, floating_point, ignore_none=True)
-            color  = str(color) if color is not None else None
+            color  = str(color) if color is not None else None #potentially change to check param
             
             if time is None: time = self.now()
             
             x = int(self.g.x if x is None else x)
             y = int(self.g.y if y is None else y)
             
+            #center parameter
             x += self.width // 2
             y  = self.height // 2 - y
             
@@ -1078,7 +1088,7 @@ def __init__():
                 The width of the rectangle to be drawn.
             height: int
                 The height of the rectangle to be drawn.
-            x: int
+            x: int #center parameter
                 The x coordinate of the center of the rectangle to be drawn.
             y: int
                 The y coordinate of the center of the rectangle to be drawn.
@@ -1096,7 +1106,7 @@ def __init__():
             width  = abs(self.check_param('width', width, integer, ignore_none=True))
             height = abs(self.check_param('height', height, integer, ignore_none=True))
             angle  = self.check_param('angle', angle, floating_point)
-            color  = str(color) if color is not None else None
+            color  = str(color) if color is not None else None #potentially change to check param
             
             if width == 0 or height == 0:
                 return
@@ -1109,6 +1119,7 @@ def __init__():
             width  = int(width)
             height = int(height)
             
+            #center parameter
             x += self.width // 2
             y  = self.height // 2 - y
             
@@ -1146,8 +1157,7 @@ def __init__():
             ----------
             text: str
                 The text to be rendered to the graphics window.
-            x: int
-
+            x: int #center parameter
                 The x coordinate to start text-rendering.
             y: int
                 The y coordinate to start text-rendering.
@@ -1207,6 +1217,7 @@ def __init__():
             
             left = x
             
+            #center parameter
             for line in re.split(r'(\n)', text):
                 if line == '\n':
                     y -= line_h
@@ -1236,7 +1247,7 @@ def __init__():
             ----------
             name: str (resource name)
                 The name of the tile-map to draw.
-            x: int
+            x: int #center parameter
                 The x coordinate of the center of the tile-map to be drawn.
             y: int
                 The y coordinate of the center of the tile-map to be drawn.
@@ -1263,13 +1274,13 @@ def __init__():
             tile_width  = abs(self.check_param('tile_width', tile_width, integer, ignore_none=True))
             tile_height = abs(self.check_param('tile_height', tile_height, integer, ignore_none=True))
             time        = self.check_param('time', time, floating_point, ignore_none=True)
-            color       = str(color) if color is not None else None
+            color       = str(color) if color is not None else None #potentially change to check param
             
             if time is None:
                 time = self.now()
             else:
                 time = float(time)
-            
+            #center parameter
             x = int(x if x is not None else self.g.x)
             y = int(y if y is not None else self.g.y)
             
@@ -1339,6 +1350,7 @@ def __init__():
             ---------
             target_fps: int (greater than zero)
                 The frame rate you want the game loop to run at.
+                #potentially add a default fps in init
             '''
             
             self.ensure_init()
@@ -1422,7 +1434,7 @@ def __init__():
             
             Returns
             -------
-            int:
+            int: #potentially add a vec2 type and return this as vec2
                 The x location of the mouse.
             '''
             
@@ -1456,7 +1468,7 @@ def __init__():
             
             Returns
             -------
-            int
+            int #potentially add a vec2 type and return this as vec2
                 The amount of movement in the x direction.
             int
                 The amount of movement in the y direction.
@@ -1528,7 +1540,7 @@ def __init__():
         def joysticks(self):
             '''
             Gets a list of joysticks currently connected to the system. 
-             
+            #potentially rename joysticks to gamepads or controllers
             The names returned can be used by joy_axis()/joy_daxis() and 
             joy_button() to specify which joystick the should read from.
             
@@ -1546,7 +1558,8 @@ def __init__():
         def joy_axis_count(self, joystick=None):
             '''
             Gets the number of axes the specified joystick has.
-            
+            #potentially get info on wether axes are bound together in a stick and combine those
+            #potentially a new function like joy_stick_count
             Parameter
             ---------
             joystick: str
@@ -1567,7 +1580,7 @@ def __init__():
         def joy_daxis(self, axis_index, direction, joystick=None):
             '''
             Returns wether the joystick axis is held is a given direction.  
-            
+            #potentially rename function to be clearer
             Parameters
             ----------
             axis_index: int
@@ -1607,7 +1620,7 @@ def __init__():
                 
             Returns
             -------
-            float
+            float #potentially add a vec2 type and return this as vec2
                 The position (-1.0 - 1.0) of the axis.
             '''
             self.ensure_init()
@@ -1642,6 +1655,7 @@ def __init__():
             ----------
             button_index: int
                 The index of the button to read.
+                #potentially replace or optionally have this as a string of the button name
             joystick: str
                 The name of the joystick to get the button state of.  Defaults to the
                 first joystick returned by joysticks().
@@ -1723,7 +1737,7 @@ def __init__():
             
             Returns
             -------
-            int
+            int #potentially add a vec2 type and return this as vec2. would allow things like vec2.width to work same as vec2.x
                 The current width of screen resolution.
             int
                 The current height of the screen resolution.
@@ -1784,6 +1798,8 @@ def __init__():
             int
                 The current width of screen resolution.
             '''
+            #function needs implementing
+
             return resolution(width)[0]
         
         @public #P
@@ -1801,6 +1817,8 @@ def __init__():
             int
                 The current height of screen resolution.
             '''
+            #function needs implementing
+
             return resolution(height=height)[1]
         
         
@@ -1834,7 +1852,7 @@ def __init__():
         def fullscreen(self, fullscreen=None):
             '''
             Gets and optionally sets weather the graphics window is in fullscreen mode.
-            
+            #potentially replace with two functions. toggle_fullscreen, and is_fullscreen.
             Parameters
             ----------
             fullscreen: bool
@@ -1902,7 +1920,7 @@ def __init__():
             rect   = SDL_Rect((screen.w - width) // 2, (screen.h - height) // 2, width, height)
             SDL_RenderCopy(self.renderer, self.backbuffer, None, rect)
             
-          
+        #potentially make this a parameter
         @public #P
         def running(self, running=None):
             '''
@@ -1938,10 +1956,11 @@ def __init__():
             ----------
             name: str (resource name)
                 The name of the sound to play.
-            volume: float
+            volume: float #potentially allow input of percentage volumes, probably detect this if it's above 1
                 The volume (0.0 - 1.0) to play the sound at.
             '''
             self.ensure_init()
+            #no check param for name
             
             volume = self.check_param('volume', volume, floating_point)
             volume = int(max(0, min(MIX_MAX_VOLUME, (MIX_MAX_VOLUME * float(volume)))))
@@ -1961,11 +1980,11 @@ def __init__():
             ----------
             name: str
                 The name of the background music to play.
-            volume: float
+            volume: float #potentially allow input of percentage volumes, probably detect this if it's above 1
                 The volume (0.0 - 1.0) to play the music at.
             '''
             self.ensure_init()
-            
+            #no check param for name
             volume = self.check_param('volume', volume, floating_point)
             volume = int(max(0, min(MIX_MAX_VOLUME, (MIX_MAX_VOLUME * float(volume)))))
             
