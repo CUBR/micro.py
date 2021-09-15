@@ -1,0 +1,12 @@
+Linux and OS X
+--------------
+Simply run (as root if necessary):
+    python3 setup.py install
+
+Windows
+-------
+Simply run (as adiministrator if necessary):
+    python setup.py install
+Or,
+    double click install.py
+

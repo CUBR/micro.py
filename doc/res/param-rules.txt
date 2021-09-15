@@ -1,0 +1,65 @@
+draw and fill functions
+
+ *  What
+ *  Location
+ *  Properties (ordered by usefullness)
+ *  Attribute overrides
+
+draw_image
+ *  What:
+     *  name
+
+ *  Location:
+     *  x, y
+
+ *  Properties:
+     *  width, height
+     *  flip
+     *  angle
+     *  time
+
+ *  Attribute overrides
+     *  color
+
+draw_text
+ *  What:
+     *  text
+
+ *  Location:
+     *  x, y
+
+ *  Properties:
+     *  antialias
+
+ *  Attribute overrides:
+     *  font_name
+     *  font_size
+     *  color
+
+draw_tilemap
+ *  What:
+     *  name
+
+ *  Location:
+     *  x, y
+
+ *  Properties:
+     *  tile_width
+     *  tile_height
+     *  time
+
+ *  Attribute overrides:
+     *  color
+
+fill_rectangle
+ *  What:
+     *  width, height
+
+ *  Location:
+     *  x, y
+
+ *  Properties:
+     *  angle
+ 
+ *  Attribute overrides:
+     *  color

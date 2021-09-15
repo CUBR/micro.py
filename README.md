@@ -11,4 +11,4 @@ systems.  Aimed at beginner Python programmers and people in a hurry!
  *  [Tutorial](https://github.com/jamescox/micro.py/wiki/Tutorial)
  *  [API documentation](https://github.com/jamescox/micro.py/wiki/API-documentation)
 
-This is a fork of the original project by james cox. He wrote the original software and this is an alteration on it.
+This is a fork of the original project by james cox. He wrote the original software and this is an alteration on it. Any altered or new source files will be marked as such. Otherwise, unaltered files will retain the original copyright and license notice.

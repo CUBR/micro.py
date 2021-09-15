@@ -1,0 +1,748 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: package micro</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>micro</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:///C:/users/sysman/dropbox/work/programming%20club/micro.py/src/micro/__init__.py">c:\users\sysman\dropbox\work\programming club\micro.py\src\micro\__init__.py</a></font></td></tr></table>
+    <p><tt>micro.py&nbsp;-&nbsp;A&nbsp;simple&nbsp;multimedia&nbsp;library&nbsp;inspired&nbsp;by&nbsp;the&nbsp;BASIC&nbsp;functions&nbsp;<br>
+provided&nbsp;by&nbsp;the&nbsp;micro-computers&nbsp;of&nbsp;the&nbsp;1980's.&nbsp;&nbsp;Built&nbsp;on&nbsp;top&nbsp;PySDL2,&nbsp;<br>
+provides&nbsp;a&nbsp;very&nbsp;high-level&nbsp;and&nbsp;simplified&nbsp;interface&nbsp;to&nbsp;SDL's&nbsp;input,&nbsp;audio&nbsp;<br>
+and&nbsp;graphics&nbsp;systems.&nbsp;&nbsp;Aimed&nbsp;at&nbsp;beginner&nbsp;Python&nbsp;programmers&nbsp;and&nbsp;people&nbsp;in&nbsp;<br>
+a&nbsp;hurry!<br>
+&nbsp;<br>
+Notes<br>
+-----<br>
+&nbsp;<br>
+Resources<br>
+~~~~~~~~~<br>
+Resource&nbsp;are&nbsp;the&nbsp;multimedia&nbsp;files&nbsp;(images,&nbsp;sound,&nbsp;music&nbsp;and&nbsp;tile-maps)<br>
+used&nbsp;by&nbsp;your&nbsp;application.&nbsp;&nbsp;Each&nbsp;resource&nbsp;is&nbsp;identified&nbsp;by&nbsp;a&nbsp;name,&nbsp;resource<br>
+names&nbsp;follow&nbsp;the&nbsp;same&nbsp;rules&nbsp;as&nbsp;Python's&nbsp;variables.&nbsp;&nbsp;Resources&nbsp;are&nbsp;loaded&nbsp;<br>
+from&nbsp;the&nbsp;resource&nbsp;directory&nbsp;(a&nbsp;parameter&nbsp;of&nbsp;the&nbsp;<a href="#-init">init</a>()&nbsp;function).&nbsp;&nbsp;The&nbsp;<br>
+resource&nbsp;directory&nbsp;defaults&nbsp;to&nbsp;the&nbsp;same&nbsp;directory&nbsp;as&nbsp;your&nbsp;applications&nbsp;<br>
+main&nbsp;script.&nbsp;<br>
+&nbsp;<br>
+When&nbsp;a&nbsp;function&nbsp;needing&nbsp;a&nbsp;resource&nbsp;is&nbsp;called,&nbsp;it&nbsp;is&nbsp;passed&nbsp;a&nbsp;resource&nbsp;name.<br>
+The&nbsp;resource&nbsp;is&nbsp;then&nbsp;searched&nbsp;for&nbsp;in&nbsp;the&nbsp;resource&nbsp;directory.&nbsp;&nbsp;If&nbsp;a&nbsp;file&nbsp;<br>
+with&nbsp;the&nbsp;same&nbsp;name&nbsp;as&nbsp;the&nbsp;resource&nbsp;is&nbsp;found&nbsp;and&nbsp;in&nbsp;a&nbsp;supported&nbsp;format,&nbsp;this<br>
+file&nbsp;is&nbsp;loaded&nbsp;and&nbsp;used&nbsp;by&nbsp;the&nbsp;function.&nbsp;&nbsp;If&nbsp;a&nbsp;matching&nbsp;resource&nbsp;not&nbsp;found&nbsp;<br>
+a&nbsp;KeyError&nbsp;is&nbsp;raised.&nbsp;&nbsp;If&nbsp;an&nbsp;invalid&nbsp;resource&nbsp;name&nbsp;is&nbsp;provided&nbsp;a&nbsp;ValueError<br>
+is&nbsp;raised.&nbsp;&nbsp;Finally&nbsp;if&nbsp;there&nbsp;is&nbsp;an&nbsp;error&nbsp;during&nbsp;loading&nbsp;the&nbsp;resource&nbsp;an&nbsp;<br>
+IOError&nbsp;is&nbsp;raised.&nbsp;&nbsp;These&nbsp;exceptions&nbsp;can&nbsp;be&nbsp;raised&nbsp;by&nbsp;all&nbsp;function&nbsp;<br>
+reacquiring&nbsp;a&nbsp;resource.<br>
+&nbsp;<br>
+micro.py&nbsp;support&nbsp;the&nbsp;following&nbsp;resource&nbsp;types.&nbsp;&nbsp;For&nbsp;images:<br>
+&nbsp;*&nbsp;&nbsp;Windows&nbsp;Bitmap&nbsp;Images&nbsp;(.bmp)<br>
+&nbsp;*&nbsp;&nbsp;Graphics&nbsp;Interchange&nbsp;Format&nbsp;(.gif)<br>
+&nbsp;*&nbsp;&nbsp;Joint&nbsp;Photographic&nbsp;Experts&nbsp;Group&nbsp;(.jpg/.jpeg)<br>
+&nbsp;*&nbsp;&nbsp;Portable&nbsp;Network&nbsp;Graphics&nbsp;(.png)<br>
+&nbsp;*&nbsp;&nbsp;Truevision&nbsp;TARGA&nbsp;(.tga)<br>
+&nbsp;*&nbsp;&nbsp;Tagged&nbsp;Image&nbsp;File&nbsp;Format&nbsp;(.tif/.tiff)<br>
+With&nbsp;an&nbsp;optional&nbsp;configuration&nbsp;file&nbsp;(.ini),&nbsp;for&nbsp;storing&nbsp;information&nbsp;<br>
+regarding&nbsp;tile&nbsp;geometry,&nbsp;transparency&nbsp;colours&nbsp;(colorkey)&nbsp;and&nbsp;animations.<br>
+&nbsp;<br>
+Supported&nbsp;fonts&nbsp;formats:<br>
+&nbsp;*&nbsp;&nbsp;Windows&nbsp;Bitmap&nbsp;Font&nbsp;Files&nbsp;(.fon)<br>
+&nbsp;*&nbsp;&nbsp;TrueType&nbsp;Font&nbsp;Files&nbsp;(.ttf)<br>
+&nbsp;<br>
+Supported&nbsp;sound&nbsp;and&nbsp;music&nbsp;formats:<br>
+&nbsp;*&nbsp;&nbsp;Audio&nbsp;Intercange&nbsp;Format&nbsp;(.aif/,aiff)<br>
+&nbsp;*&nbsp;&nbsp;Free&nbsp;Lossless&nbsp;Audio&nbsp;Codec&nbsp;(.flac)<br>
+&nbsp;*&nbsp;&nbsp;MPEG-1&nbsp;or&nbsp;MPEG-2&nbsp;Audio&nbsp;Layer&nbsp;III&nbsp;(.mp3)<br>
+&nbsp;*&nbsp;&nbsp;Ogg&nbsp;Vorbis&nbsp;(.ogg)<br>
+&nbsp;*&nbsp;&nbsp;Waveform&nbsp;Audio&nbsp;File&nbsp;Format&nbsp;(.wav)<br>
+&nbsp;<br>
+Simple&nbsp;text&nbsp;files&nbsp;(.txt)&nbsp;are&nbsp;used&nbsp;for&nbsp;tile-mapped&nbsp;graphics.<br>
+&nbsp;<br>
+Tile-map&nbsp;format&nbsp;example<br>
+^^^^^^^^^^^^^^^^^^^^^^^<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;'#'&nbsp;and&nbsp;';'&nbsp;characters&nbsp;mark&nbsp;the&nbsp;begging&nbsp;of&nbsp;a&nbsp;comment.&nbsp;&nbsp;All&nbsp;comments<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;and&nbsp;white-space&nbsp;are&nbsp;ignored&nbsp;by&nbsp;the&nbsp;tile-map&nbsp;format.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;The&nbsp;first&nbsp;non-blank&nbsp;line&nbsp;should&nbsp;name&nbsp;the&nbsp;image&nbsp;to&nbsp;use&nbsp;as&nbsp;the&nbsp;source<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;of&nbsp;tiles&nbsp;for&nbsp;this&nbsp;tile-map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tiles&nbsp;=&nbsp;my_tiles<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Each&nbsp;subsequent&nbsp;non-blank&nbsp;line&nbsp;is&nbsp;a&nbsp;comma-separated&nbsp;list&nbsp;of&nbsp;either<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;tile&nbsp;indices,&nbsp;or&nbsp;animation&nbsp;names&nbsp;the&nbsp;the&nbsp;source&nbsp;image&nbsp;has&nbsp;defined.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Zero&nbsp;is&nbsp;used&nbsp;to&nbsp;define&nbsp;a&nbsp;transparent&nbsp;tile.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;The&nbsp;following&nbsp;creates&nbsp;a&nbsp;small&nbsp;4x5&nbsp;tile-map.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0,0,bird,0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1,2,2,3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;4,5,5,6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;4,5,5,6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;4,5,5,6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;7,8,8,9<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Image&nbsp;configuration&nbsp;format&nbsp;example<br>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;The&nbsp;.meta&nbsp;section&nbsp;store&nbsp;information&nbsp;about&nbsp;the&nbsp;image:&nbsp;Tile&nbsp;geometry,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;and&nbsp;the&nbsp;colour-key&nbsp;(transparent&nbsp;colour).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[.meta]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;The&nbsp;width&nbsp;and&nbsp;height&nbsp;(in&nbsp;pixels)&nbsp;of&nbsp;each&nbsp;tile&nbsp;in&nbsp;the&nbsp;image.&nbsp;&nbsp;Defaults<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;to&nbsp;the&nbsp;total&nbsp;width&nbsp;and&nbsp;height&nbsp;of&nbsp;the&nbsp;image&nbsp;resulting&nbsp;in&nbsp;only&nbsp;one&nbsp;tile<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;being&nbsp;defined.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tile_width&nbsp;&nbsp;&nbsp;=&nbsp;16<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tile_height&nbsp;&nbsp;=&nbsp;12<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;The&nbsp;number&nbsp;of&nbsp;pixels&nbsp;between&nbsp;each&nbsp;tile<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tile_spacing&nbsp;=&nbsp;2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;The&nbsp;number&nbsp;of&nbsp;pixels&nbsp;that&nbsp;surround&nbsp;the&nbsp;entire&nbsp;tile&nbsp;set.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tile_margin&nbsp;&nbsp;=&nbsp;10<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;The&nbsp;transparency&nbsp;colour&nbsp;used&nbsp;in&nbsp;this&nbsp;image.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;colorkey&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;rgb(255,&nbsp;0,&nbsp;255)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;All&nbsp;subsequent&nbsp;sections&nbsp;define&nbsp;animations&nbsp;available&nbsp;for&nbsp;this&nbsp;image.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[animation1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rate&nbsp;&nbsp;&nbsp;=&nbsp;10&nbsp;&nbsp;&nbsp;#&nbsp;The&nbsp;frame&nbsp;rate&nbsp;the&nbsp;animation&nbsp;should&nbsp;run&nbsp;at&nbsp;in&nbsp;fps.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;loop&nbsp;&nbsp;&nbsp;=&nbsp;loop&nbsp;#&nbsp;The&nbsp;type&nbsp;of&nbsp;loop&nbsp;the&nbsp;animation&nbsp;should&nbsp;run&nbsp;in.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;frames&nbsp;=&nbsp;1,&nbsp;2&nbsp;#&nbsp;The&nbsp;index&nbsp;of&nbsp;the&nbsp;tiles&nbsp;to&nbsp;use&nbsp;as&nbsp;the&nbsp;frames&nbsp;of&nbsp;this&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;animation.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[animation2]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rate&nbsp;&nbsp;&nbsp;=&nbsp;20<br>
+&nbsp;&nbsp;&nbsp;&nbsp;loop&nbsp;&nbsp;&nbsp;=&nbsp;none<br>
+&nbsp;&nbsp;&nbsp;&nbsp;frames&nbsp;=&nbsp;3,&nbsp;4,&nbsp;5,&nbsp;6<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Colours<br>
+~~~~~~~<br>
+For&nbsp;simplicity&nbsp;all&nbsp;colours&nbsp;in&nbsp;micro.py&nbsp;are&nbsp;specified&nbsp;as&nbsp;strings.&nbsp;&nbsp;The&nbsp;<br>
+format&nbsp;used&nbsp;is&nbsp;an&nbsp;extended&nbsp;version&nbsp;of&nbsp;what&nbsp;is&nbsp;available&nbsp;in&nbsp;CSS.&nbsp;&nbsp;Colours<br>
+can&nbsp;be&nbsp;specified&nbsp;by&nbsp;name:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-draw_color">draw_color</a>('red')<br>
+By&nbsp;hex&nbsp;codes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-draw_color">draw_color</a>('#f00')&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;#rgb<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-draw_color">draw_color</a>('#ff0000')&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;#rrggbb<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-draw_color">draw_color</a>('#f008')&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;#rgba<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-draw_color">draw_color</a>('#ff000080')&nbsp;&nbsp;#&nbsp;#rrggbbaa<br>
+By&nbsp;rgb,&nbsp;rgba&nbsp;style:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-draw_color">draw_color</a>('rgb(255,&nbsp;0,&nbsp;0)')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-draw_color">draw_color</a>('rgba(255,&nbsp;0,&nbsp;0,&nbsp;0.5)')<br>
+An&nbsp;by&nbsp;hsl,&nbsp;hsla&nbsp;style:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-draw_color">draw_color</a>('hsl(0,&nbsp;100%,&nbsp;50%)')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-draw_color">draw_color</a>('hsla(0,&nbsp;100%,&nbsp;50%,&nbsp;0.5)')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Type&nbsp;conversion<br>
+~~~~~~~~~~~~~~~<br>
+All&nbsp;functions&nbsp;in&nbsp;micro.py&nbsp;have&nbsp;a&nbsp;documented&nbsp;type&nbsp;associated&nbsp;with&nbsp;each&nbsp;<br>
+parameter.&nbsp;&nbsp;Be&nbsp;it&nbsp;int,&nbsp;str,&nbsp;bool,&nbsp;etc.&nbsp;&nbsp;Where&nbsp;possible&nbsp;functions&nbsp;will&nbsp;<br>
+attempt&nbsp;to&nbsp;convert&nbsp;any&nbsp;value&nbsp;into&nbsp;the&nbsp;correct&nbsp;type.&nbsp;&nbsp;When&nbsp;this&nbsp;conversion&nbsp;<br>
+is&nbsp;not&nbsp;possible&nbsp;or&nbsp;fails&nbsp;a&nbsp;TypeError&nbsp;is&nbsp;raised.&nbsp;&nbsp;This&nbsp;means&nbsp;all&nbsp;functions<br>
+accepting&nbsp;parameters&nbsp;can&nbsp;raise&nbsp;TypeError's.&nbsp;&nbsp;It&nbsp;is&nbsp;advisable&nbsp;to&nbsp;ensure&nbsp;<br>
+that&nbsp;values&nbsp;are&nbsp;converted&nbsp;before&nbsp;being&nbsp;passed&nbsp;to&nbsp;a&nbsp;function&nbsp;to&nbsp;avoid&nbsp;<br>
+surprises.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Package Contents</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="micro.colors.html">colors</a><br>
+</td><td width="25%" valign=top><a href="micro.input.html">input</a><br>
+</td><td width="25%" valign=top><a href="micro.resources.html">resources</a><br>
+</td><td width="25%" valign=top><a href="micro.sdl2.html"><strong>sdl2</strong>&nbsp;(package)</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-background_color"><strong>background_color</strong></a>(color=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;and&nbsp;optionally&nbsp;sets&nbsp;the&nbsp;current&nbsp;background&nbsp;colour.&nbsp;&nbsp;<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;colour&nbsp;used&nbsp;when&nbsp;clearing&nbsp;the&nbsp;screen.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+color:&nbsp;str&nbsp;(colour&nbsp;name)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;background&nbsp;colour.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;background&nbsp;colour.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises<br>
+------<br>
+ValueError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;colour&nbsp;supplied&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;colour&nbsp;value.</tt></dd></dl>
+ <dl><dt><a name="-clear"><strong>clear</strong></a>(color=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Clears&nbsp;the&nbsp;graphics&nbsp;window.<br>
+&nbsp;<br>
+When&nbsp;no&nbsp;colour&nbsp;is&nbsp;specified,&nbsp;the&nbsp;current&nbsp;background&nbsp;colour&nbsp;is&nbsp;used.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+color:&nbsp;str&nbsp;(color&nbsp;name)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;colour&nbsp;to&nbsp;fill&nbsp;the&nbsp;background&nbsp;of&nbsp;the&nbsp;graphics&nbsp;window&nbsp;with.</tt></dd></dl>
+ <dl><dt><a name="-draw_color"><strong>draw_color</strong></a>(color=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;and&nbsp;optionally&nbsp;sets&nbsp;the&nbsp;current&nbsp;draw&nbsp;colour.&nbsp;&nbsp;<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;colour&nbsp;used&nbsp;when&nbsp;drawing&nbsp;text,&nbsp;outlined&nbsp;shapes&nbsp;and&nbsp;recolouring<br>
+images&nbsp;and&nbsp;tile-maps.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+color:&nbsp;str&nbsp;(colour&nbsp;name)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;fill&nbsp;colour.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;fill&nbsp;colour.<br>
+&nbsp;<br>
+Raises<br>
+------<br>
+ValueError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;colour&nbsp;supplied&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;colour&nbsp;value.</tt></dd></dl>
+ <dl><dt><a name="-draw_image"><strong>draw_image</strong></a>(name, x=None, y=None, width=None, height=None, flip='', angle=0.0, time=None, color=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Draws&nbsp;an&nbsp;image/animation&nbsp;to&nbsp;the&nbsp;graphics&nbsp;window.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+name:&nbsp;str&nbsp;(resource&nbsp;name)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;image&nbsp;and&nbsp;optionally&nbsp;the&nbsp;animation&nbsp;or&nbsp;frame&nbsp;to&nbsp;render.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;To&nbsp;specify&nbsp;an&nbsp;animation&nbsp;or&nbsp;frame,&nbsp;simple&nbsp;place&nbsp;a&nbsp;forward&nbsp;slash&nbsp;after&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;image&nbsp;name&nbsp;followed&nbsp;by&nbsp;either&nbsp;the&nbsp;frame&nbsp;index&nbsp;of&nbsp;animation&nbsp;name.<br>
+x:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;x&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;image&nbsp;to&nbsp;be&nbsp;drawn.<br>
+y:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;y&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;image&nbsp;to&nbsp;be&nbsp;drawn.<br>
+width:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;width&nbsp;of&nbsp;the&nbsp;image&nbsp;to&nbsp;be&nbsp;drawn.&nbsp;&nbsp;When&nbsp;no&nbsp;height&nbsp;is&nbsp;specified&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;width&nbsp;is&nbsp;scaled&nbsp;by&nbsp;the&nbsp;images&nbsp;aspect&nbsp;ratio&nbsp;to&nbsp;provide&nbsp;a&nbsp;hight&nbsp;for&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;image.<br>
+height:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;image&nbsp;to&nbsp;be&nbsp;drawn.&nbsp;&nbsp;When&nbsp;no&nbsp;width&nbsp;is&nbsp;specified&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;height&nbsp;is&nbsp;scaled&nbsp;by&nbsp;the&nbsp;images&nbsp;aspect&nbsp;ratio&nbsp;to&nbsp;provide&nbsp;a&nbsp;width&nbsp;for&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;image.<br>
+flip:&nbsp;str&nbsp;(flip&nbsp;flags)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;direction&nbsp;(horizontal/vertical)&nbsp;that&nbsp;the&nbsp;image&nbsp;should&nbsp;be&nbsp;flipped&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;by.&nbsp;&nbsp;This&nbsp;is&nbsp;a&nbsp;string&nbsp;containing&nbsp;the&nbsp;characters&nbsp;'h'&nbsp;or&nbsp;'v'&nbsp;to&nbsp;specify;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;horizontal&nbsp;flip&nbsp;and&nbsp;vertical&nbsp;flip&nbsp;respectively.<br>
+angle:&nbsp;float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;angle&nbsp;(in&nbsp;degrees)&nbsp;to&nbsp;rotate&nbsp;the&nbsp;image&nbsp;by.<br>
+time:&nbsp;float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;time&nbsp;position&nbsp;(in&nbsp;seconds)&nbsp;into&nbsp;the&nbsp;specified&nbsp;animation.&nbsp;&nbsp;When&nbsp;not<br>
+&nbsp;&nbsp;&nbsp;&nbsp;specified&nbsp;the&nbsp;current&nbsp;time&nbsp;is&nbsp;used.<br>
+color:&nbsp;str&nbsp;(colour&nbsp;name)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;colour&nbsp;to&nbsp;recolour&nbsp;the&nbsp;image&nbsp;with.&nbsp;&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;draw&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;colour.</tt></dd></dl>
+ <dl><dt><a name="-draw_text"><strong>draw_text</strong></a>(text, x=None, y=None, antialias=False, font_name=None, font_size=None, color=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Draws&nbsp;text&nbsp;to&nbsp;the&nbsp;graphics&nbsp;window.<br>
+&nbsp;<br>
+When&nbsp;no&nbsp;other&nbsp;parameters&nbsp;are&nbsp;provided,&nbsp;the&nbsp;text&nbsp;is&nbsp;rendered&nbsp;at&nbsp;the&nbsp;graphics<br>
+cursor's&nbsp;location&nbsp;with&nbsp;the&nbsp;text's&nbsp;base-line&nbsp;at&nbsp;the&nbsp;cursors&nbsp;y&nbsp;coordinate.&nbsp;&nbsp;<br>
+The&nbsp;text&nbsp;by&nbsp;default&nbsp;is&nbsp;not&nbsp;anti-aliased&nbsp;and&nbsp;is&nbsp;rendered&nbsp;in&nbsp;the&nbsp;current&nbsp;font<br>
+&nbsp;<br>
+and&nbsp;colour.&nbsp;&nbsp;Afterwards&nbsp;the&nbsp;graphics&nbsp;cursor's&nbsp;location&nbsp;is&nbsp;set&nbsp;at&nbsp;the&nbsp;<br>
+end&nbsp;of&nbsp;the&nbsp;base-line&nbsp;of&nbsp;the&nbsp;last&nbsp;character&nbsp;rendered.<br>
+&nbsp;<br>
+&nbsp;<br>
+Parameters<br>
+&nbsp;<br>
+----------<br>
+text:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;text&nbsp;to&nbsp;be&nbsp;rendered&nbsp;to&nbsp;the&nbsp;graphics&nbsp;window.<br>
+x:&nbsp;int<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;x&nbsp;coordinate&nbsp;to&nbsp;start&nbsp;text-rendering.<br>
+y:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;y&nbsp;coordinate&nbsp;to&nbsp;start&nbsp;text-rendering.<br>
+antialias:&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Weather&nbsp;the&nbsp;text&nbsp;should&nbsp;be&nbsp;anti-aliased&nbsp;(smoothed).<br>
+&nbsp;<br>
+font_name:&nbsp;str&nbsp;(resource&nbsp;name)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;font&nbsp;used&nbsp;to&nbsp;render&nbsp;the&nbsp;text.<br>
+font_size:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;size&nbsp;of&nbsp;the&nbsp;font&nbsp;used&nbsp;to&nbsp;render&nbsp;the&nbsp;text.<br>
+&nbsp;<br>
+color:&nbsp;str&nbsp;(colour&nbsp;name)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;colour&nbsp;used&nbsp;to&nbsp;render&nbsp;the&nbsp;text.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises<br>
+------<br>
+ValueError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;font&nbsp;name&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;resource&nbsp;identifier.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Or&nbsp;if&nbsp;the&nbsp;font&nbsp;size&nbsp;less&nbsp;than&nbsp;or&nbsp;equal&nbsp;to&nbsp;0.<br>
+&nbsp;<br>
+KeyError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;no&nbsp;font&nbsp;by&nbsp;the&nbsp;given&nbsp;name&nbsp;can&nbsp;be&nbsp;found&nbsp;in&nbsp;the&nbsp;resources_dir.</tt></dd></dl>
+ <dl><dt><a name="-draw_tilemap"><strong>draw_tilemap</strong></a>(name, x=None, y=None, tile_width=None, tile_height=None, time=0.0, color=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Draws&nbsp;a&nbsp;tile-map&nbsp;to&nbsp;the&nbsp;graphics&nbsp;window.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+name:&nbsp;str&nbsp;(resource&nbsp;name)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;tile-map&nbsp;to&nbsp;draw.<br>
+x:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;x&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;tile-map&nbsp;to&nbsp;be&nbsp;drawn.<br>
+y:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;y&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;tile-map&nbsp;to&nbsp;be&nbsp;drawn.<br>
+tile_width:&nbsp;int&nbsp;(greater&nbsp;than&nbsp;zero)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;width&nbsp;of&nbsp;each&nbsp;individual&nbsp;tile&nbsp;in&nbsp;the&nbsp;tile-map.&nbsp;&nbsp;When&nbsp;no&nbsp;tile&nbsp;height<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;given&nbsp;the&nbsp;width&nbsp;is&nbsp;scaled&nbsp;by&nbsp;the&nbsp;tile-maps&nbsp;tile's&nbsp;aspect&nbsp;ratio&nbsp;to&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;provide&nbsp;a&nbsp;default&nbsp;tile&nbsp;height.<br>
+tile_height:&nbsp;int&nbsp;(greater&nbsp;than&nbsp;zero)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;width&nbsp;of&nbsp;each&nbsp;individual&nbsp;tile&nbsp;in&nbsp;the&nbsp;tile-map.&nbsp;&nbsp;When&nbsp;no&nbsp;tile&nbsp;height<br>
+&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;given&nbsp;the&nbsp;width&nbsp;is&nbsp;scaled&nbsp;by&nbsp;the&nbsp;tile-maps&nbsp;tile's&nbsp;aspect&nbsp;ratio&nbsp;to&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;provide&nbsp;a&nbsp;default&nbsp;tile&nbsp;height.<br>
+time:&nbsp;float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;time&nbsp;position&nbsp;(in&nbsp;seconds)&nbsp;into&nbsp;each&nbsp;tiles&nbsp;animation.&nbsp;&nbsp;When&nbsp;not<br>
+&nbsp;&nbsp;&nbsp;&nbsp;specified&nbsp;the&nbsp;current&nbsp;time&nbsp;is&nbsp;used.<br>
+color:&nbsp;str&nbsp;(colour&nbsp;name)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;colour&nbsp;to&nbsp;recolour&nbsp;the&nbsp;tile-map&nbsp;with.&nbsp;&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;draw<br>
+&nbsp;&nbsp;&nbsp;&nbsp;colour.</tt></dd></dl>
+ <dl><dt><a name="-fill_color"><strong>fill_color</strong></a>(color=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;and&nbsp;optionally&nbsp;sets&nbsp;the&nbsp;current&nbsp;fill&nbsp;colour.&nbsp;&nbsp;<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;colour&nbsp;used&nbsp;when&nbsp;drawing&nbsp;filled&nbsp;shapes&nbsp;to&nbsp;the&nbsp;screen.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+color:&nbsp;str&nbsp;(colour&nbsp;name)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;fill&nbsp;colour.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;fill&nbsp;colour.<br>
+&nbsp;<br>
+Raises<br>
+------<br>
+ValueError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;colour&nbsp;supplied&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;colour&nbsp;value.</tt></dd></dl>
+ <dl><dt><a name="-fill_rectangle"><strong>fill_rectangle</strong></a>(width, height, x=None, y=None, angle=0.0, color=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Draws&nbsp;a&nbsp;filled&nbsp;rectangle&nbsp;to&nbsp;the&nbsp;graphics&nbsp;window.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+width:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;width&nbsp;of&nbsp;the&nbsp;rectangle&nbsp;to&nbsp;be&nbsp;drawn.<br>
+height:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;rectangle&nbsp;to&nbsp;be&nbsp;drawn.<br>
+x:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;x&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;rectangle&nbsp;to&nbsp;be&nbsp;drawn.<br>
+y:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;y&nbsp;coordinate&nbsp;of&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;rectangle&nbsp;to&nbsp;be&nbsp;drawn.<br>
+anlge:&nbsp;float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;angle&nbsp;(in&nbsp;degrees)&nbsp;to&nbsp;rotate&nbsp;the&nbsp;rectangle&nbsp;by.<br>
+color:&nbsp;(colour&nbsp;name)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;colour&nbsp;to&nbsp;fill&nbsp;the&nbsp;rectangle&nbsp;with.&nbsp;&nbsp;Defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;fill<br>
+&nbsp;&nbsp;&nbsp;&nbsp;colour.</tt></dd></dl>
+ <dl><dt><a name="-font"><strong>font</strong></a>(name=None, size=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;and&nbsp;optionally&nbsp;sets&nbsp;the&nbsp;current&nbsp;font.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;font&nbsp;used&nbsp;by&nbsp;default,&nbsp;by&nbsp;text&nbsp;drawing&nbsp;functions.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+name:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;font&nbsp;to&nbsp;be&nbsp;set&nbsp;as&nbsp;the&nbsp;current&nbsp;font.<br>
+size:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;size&nbsp;of&nbsp;the&nbsp;font&nbsp;to&nbsp;be&nbsp;set&nbsp;as&nbsp;the&nbsp;current&nbsp;font.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;current&nbsp;font.<br>
+int&nbsp;(greater&nbsp;than&nbsp;zero)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;size&nbsp;of&nbsp;the&nbsp;current&nbsp;font.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises<br>
+------<br>
+ValueError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;font&nbsp;name&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;resource&nbsp;identifier.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Or&nbsp;if&nbsp;the&nbsp;font&nbsp;size&nbsp;less&nbsp;than&nbsp;or&nbsp;equal&nbsp;to&nbsp;0.<br>
+KeyError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;no&nbsp;font&nbsp;by&nbsp;the&nbsp;given&nbsp;name&nbsp;can&nbsp;be&nbsp;found&nbsp;in&nbsp;the&nbsp;resources_dir.</tt></dd></dl>
+ <dl><dt><a name="-font_name"><strong>font_name</strong></a>(name=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;and&nbsp;optionally&nbsp;sets&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;current&nbsp;font.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;font&nbsp;used&nbsp;by&nbsp;default,&nbsp;by&nbsp;text&nbsp;drawing&nbsp;functions.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+name:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;font&nbsp;to&nbsp;be&nbsp;set&nbsp;as&nbsp;the&nbsp;current&nbsp;font.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;current&nbsp;font.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises<br>
+------<br>
+ValueError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;font&nbsp;name&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;resource&nbsp;identifier.<br>
+KeyError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;no&nbsp;font&nbsp;by&nbsp;the&nbsp;given&nbsp;name&nbsp;can&nbsp;be&nbsp;found&nbsp;in&nbsp;the&nbsp;resources_dir.</tt></dd></dl>
+ <dl><dt><a name="-font_size"><strong>font_size</strong></a>(size=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;and&nbsp;optionally&nbsp;sets&nbsp;the&nbsp;size&nbsp;of&nbsp;current&nbsp;font.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;font&nbsp;used&nbsp;by&nbsp;default,&nbsp;by&nbsp;text&nbsp;drawing&nbsp;functions.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+size:&nbsp;int&nbsp;(greater&nbsp;than&nbsp;zero)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;size&nbsp;of&nbsp;the&nbsp;font&nbsp;to&nbsp;be&nbsp;set&nbsp;as&nbsp;the&nbsp;current&nbsp;font.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;size&nbsp;of&nbsp;the&nbsp;current&nbsp;font.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises<br>
+------<br>
+ValueError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;font&nbsp;size&nbsp;less&nbsp;than&nbsp;or&nbsp;equal&nbsp;to&nbsp;0.</tt></dd></dl>
+ <dl><dt><a name="-fps"><strong>fps</strong></a>()<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;the&nbsp;current&nbsp;frames&nbsp;per&nbsp;second&nbsp;as&nbsp;timed&nbsp;between&nbsp;calls&nbsp;to&nbsp;<a href="#-update">update</a>().<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;current&nbsp;frames&nbsp;per&nbsp;second.</tt></dd></dl>
+ <dl><dt><a name="-fullscreen"><strong>fullscreen</strong></a>(fullscreen=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;and&nbsp;optionally&nbsp;sets&nbsp;weather&nbsp;the&nbsp;graphics&nbsp;window&nbsp;is&nbsp;in&nbsp;fullscreen&nbsp;mode.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+fullscreen:&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;When&nbsp;specified,&nbsp;set&nbsp;the&nbsp;graphics&nbsp;windows&nbsp;fullscreen&nbsp;state.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;graphics&nbsp;window&nbsp;is&nbsp;fullscreen</tt></dd></dl>
+ <dl><dt><a name="-init"><strong>init</strong></a>(width=320, height=180, fullscreen=False, title=None, resources_dir=None, redirect_output=True)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Initialises&nbsp;the&nbsp;micro.py&nbsp;library.<br>
+&nbsp;<br>
+Creates&nbsp;the&nbsp;graphics&nbsp;window&nbsp;and&nbsp;sets&nbsp;various&nbsp;configurations&nbsp;options&nbsp;used<br>
+throughout&nbsp;micro.py's&nbsp;operation.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+width:&nbsp;int&nbsp;(greater&nbsp;than&nbsp;zero)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;width&nbsp;of&nbsp;the&nbsp;graphics&nbsp;window.<br>
+height:&nbsp;int&nbsp;(greater&nbsp;than&nbsp;zero)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;height&nbsp;of&nbsp;the&nbsp;graphics&nbsp;window.<br>
+fullscreen:&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Weather&nbsp;the&nbsp;graphics&nbsp;window&nbsp;should&nbsp;be&nbsp;displayed&nbsp;in&nbsp;fullscreen.<br>
+title:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;title&nbsp;of&nbsp;the&nbsp;graphics&nbsp;window.<br>
+resources_dir:&nbsp;str&nbsp;(path&nbsp;to&nbsp;an&nbsp;existing&nbsp;directory)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;directory&nbsp;where&nbsp;resources&nbsp;should&nbsp;be&nbsp;searched&nbsp;for,&nbsp;and&nbsp;loaded&nbsp;from&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;micro.py.<br>
+redirect_output:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Weather&nbsp;STDOUT&nbsp;should&nbsp;be&nbsp;redirected&nbsp;to&nbsp;the&nbsp;graphics&nbsp;window.&nbsp;&nbsp;This&nbsp;has<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;effect&nbsp;of&nbsp;causing&nbsp;Python's&nbsp;built-in&nbsp;print&nbsp;function&nbsp;to&nbsp;render&nbsp;text<br>
+&nbsp;&nbsp;&nbsp;&nbsp;using&nbsp;micro.py's&nbsp;draw_text&nbsp;function.<br>
+&nbsp;<br>
+Raises<br>
+------<br>
+RuntimeError<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;initialisation&nbsp;could&nbsp;not&nbsp;be&nbsp;completed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Notes<br>
+-----<br>
+This&nbsp;function&nbsp;doesn't&nbsp;have&nbsp;to&nbsp;be&nbsp;called&nbsp;by&nbsp;programs&nbsp;using&nbsp;micro.py.&nbsp;&nbsp;All&nbsp;<br>
+micro.py&nbsp;function&nbsp;test&nbsp;if&nbsp;<a href="#-init">init</a>()&nbsp;has&nbsp;been&nbsp;called&nbsp;and&nbsp;if&nbsp;not&nbsp;call&nbsp;<a href="#-init">init</a>()&nbsp;<br>
+with&nbsp;it's&nbsp;default&nbsp;options.&nbsp;&nbsp;This&nbsp;means&nbsp;that&nbsp;if&nbsp;<a href="#-init">init</a>()&nbsp;hasn't&nbsp;been&nbsp;called<br>
+explicitly,&nbsp;any&nbsp;of&nbsp;micro.py's&nbsp;functions&nbsp;could&nbsp;raise&nbsp;the&nbsp;same&nbsp;exceptions&nbsp;as<br>
+<a href="#-init">init</a>().</tt></dd></dl>
+ <dl><dt><a name="-joy_axis"><strong>joy_axis</strong></a>(axis_index, joystick=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;the&nbsp;position&nbsp;of&nbsp;a&nbsp;joystick&nbsp;axis.&nbsp;&nbsp;<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+axis_index:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;index&nbsp;of&nbsp;the&nbsp;axis&nbsp;to&nbsp;read.<br>
+joystick:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;joystick&nbsp;to&nbsp;get&nbsp;the&nbsp;axis&nbsp;position&nbsp;of.&nbsp;&nbsp;Defaults&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;first&nbsp;joystick&nbsp;returned&nbsp;by&nbsp;<a href="#-joysticks">joysticks</a>().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns<br>
+-------<br>
+float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;position&nbsp;(-1.0&nbsp;-&nbsp;1.0)&nbsp;of&nbsp;the&nbsp;axis.</tt></dd></dl>
+ <dl><dt><a name="-joy_axis_count"><strong>joy_axis_count</strong></a>(joystick=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;the&nbsp;number&nbsp;of&nbsp;axes&nbsp;the&nbsp;specified&nbsp;joystick&nbsp;has.<br>
+&nbsp;<br>
+Parameter<br>
+---------<br>
+joystick:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;joystick&nbsp;to&nbsp;get&nbsp;the&nbsp;axis&nbsp;count&nbsp;of.&nbsp;&nbsp;Defaults&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;first&nbsp;joystick&nbsp;returned&nbsp;from&nbsp;<a href="#-joysticks">joysticks</a>().<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;number&nbsp;of&nbsp;axis&nbsp;the&nbsp;joystick&nbsp;has.</tt></dd></dl>
+ <dl><dt><a name="-joy_button"><strong>joy_button</strong></a>(button_index, joystick=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;the&nbsp;state&nbsp;of&nbsp;a&nbsp;joystick&nbsp;button.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+button_index:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;index&nbsp;of&nbsp;the&nbsp;button&nbsp;to&nbsp;read.<br>
+joystick:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;joystick&nbsp;to&nbsp;get&nbsp;the&nbsp;button&nbsp;state&nbsp;of.&nbsp;&nbsp;Defaults&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;first&nbsp;joystick&nbsp;returned&nbsp;by&nbsp;<a href="#-joysticks">joysticks</a>().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns<br>
+-------<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;number&nbsp;of&nbsp;frames&nbsp;the&nbsp;button&nbsp;has&nbsp;been&nbsp;held&nbsp;down&nbsp;for.</tt></dd></dl>
+ <dl><dt><a name="-joy_button_count"><strong>joy_button_count</strong></a>(joystick=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;the&nbsp;number&nbsp;of&nbsp;buttons&nbsp;a&nbsp;joystick&nbsp;has.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+joystick:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;joystick&nbsp;to&nbsp;get&nbsp;the&nbsp;button&nbsp;count&nbsp;of.&nbsp;&nbsp;Defaults&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;first&nbsp;joystick&nbsp;returned&nbsp;by&nbsp;<a href="#-joysticks">joysticks</a>().</tt></dd></dl>
+ <dl><dt><a name="-joy_daxis"><strong>joy_daxis</strong></a>(axis_index, direction, joystick=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Returns&nbsp;wether&nbsp;the&nbsp;joystick&nbsp;axis&nbsp;is&nbsp;held&nbsp;is&nbsp;a&nbsp;given&nbsp;direction.&nbsp;&nbsp;<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+axis_index:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;index&nbsp;of&nbsp;the&nbsp;axis&nbsp;to&nbsp;read.<br>
+direction:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;direction&nbsp;the&nbsp;axis&nbsp;is&nbsp;pointing&nbsp;in,&nbsp;positve&nbsp;or&nbsp;negative.<br>
+joystick:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;joystick&nbsp;to&nbsp;get&nbsp;the&nbsp;axis&nbsp;direction&nbsp;of.&nbsp;&nbsp;Defaults&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;first&nbsp;joystick&nbsp;returned&nbsp;by&nbsp;<a href="#-joysticks">joysticks</a>().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns<br>
+-------<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;number&nbsp;of&nbsp;frames&nbsp;the&nbsp;axis&nbsp;has&nbsp;been&nbsp;held&nbsp;in&nbsp;the&nbsp;given&nbsp;direction.</tt></dd></dl>
+ <dl><dt><a name="-joysticks"><strong>joysticks</strong></a>()<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;a&nbsp;list&nbsp;of&nbsp;joysticks&nbsp;currently&nbsp;connected&nbsp;to&nbsp;the&nbsp;system.&nbsp;<br>
+&nbsp;<br>
+The&nbsp;names&nbsp;returned&nbsp;can&nbsp;be&nbsp;used&nbsp;by&nbsp;<a href="#-joy_axis">joy_axis</a>()/<a href="#-joy_daxis">joy_daxis</a>()&nbsp;and&nbsp;<br>
+<a href="#-joy_button">joy_button</a>()&nbsp;to&nbsp;specify&nbsp;which&nbsp;joystick&nbsp;the&nbsp;should&nbsp;read&nbsp;from.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+list&nbsp;of&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;names&nbsp;of&nbsp;the&nbsp;currently&nbsp;connected&nbsp;joysticks.</tt></dd></dl>
+ <dl><dt><a name="-key"><strong>key</strong></a>(key_name)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;the&nbsp;state&nbsp;of&nbsp;a&nbsp;keyboard&nbsp;key.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+key_name:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;key&nbsp;which&nbsp;is&nbsp;to&nbsp;be&nbsp;queried.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;number&nbsp;of&nbsp;frames&nbsp;the&nbsp;key&nbsp;has&nbsp;been&nbsp;pressed&nbsp;down&nbsp;for.</tt></dd></dl>
+ <dl><dt><a name="-keys"><strong>keys</strong></a>()<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Returns&nbsp;a&nbsp;set&nbsp;of&nbsp;keys&nbsp;that&nbsp;are&nbsp;currently&nbsp;pressed&nbsp;down&nbsp;on&nbsp;the&nbsp;keyboard.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+set&nbsp;of&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;of&nbsp;keys&nbsp;currently&nbsp;pressed.</tt></dd></dl>
+ <dl><dt><a name="-location"><strong>location</strong></a>(x=None, y=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;and&nbsp;optionally&nbsp;sets&nbsp;the&nbsp;current&nbsp;location&nbsp;of&nbsp;the&nbsp;graphics&nbsp;cursor.<br>
+&nbsp;<br>
+This&nbsp;location&nbsp;is&nbsp;the&nbsp;default&nbsp;locations&nbsp;used&nbsp;by&nbsp;drawing&nbsp;functions.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+x:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;x&nbsp;location&nbsp;to&nbsp;set&nbsp;the&nbsp;graphics&nbsp;cursor&nbsp;to.<br>
+y:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;y&nbsp;location&nbsp;to&nbsp;set&nbsp;the&nbsp;graphics&nbsp;cursor&nbsp;to.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;x&nbsp;location&nbsp;of&nbsp;the&nbsp;graphics&nbsp;cursor.<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;y&nbsp;location&nbsp;of&nbsp;the&nbsp;graphics&nbsp;cursor.</tt></dd></dl>
+ <dl><dt><a name="-location_x"><strong>location_x</strong></a>(x=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;and&nbsp;optionally&nbsp;sets&nbsp;the&nbsp;current&nbsp;x&nbsp;location&nbsp;of&nbsp;the&nbsp;graphics&nbsp;cursor.<br>
+&nbsp;<br>
+This&nbsp;location&nbsp;is&nbsp;the&nbsp;default&nbsp;locations&nbsp;used&nbsp;by&nbsp;drawing&nbsp;functions.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+x:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;x&nbsp;location&nbsp;to&nbsp;set&nbsp;the&nbsp;graphics&nbsp;cursor&nbsp;to.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;x&nbsp;location&nbsp;of&nbsp;the&nbsp;graphics&nbsp;cursor.</tt></dd></dl>
+ <dl><dt><a name="-location_y"><strong>location_y</strong></a>(y=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;and&nbsp;optionally&nbsp;sets&nbsp;the&nbsp;current&nbsp;y&nbsp;location&nbsp;of&nbsp;the&nbsp;graphics&nbsp;cursor.<br>
+&nbsp;<br>
+This&nbsp;location&nbsp;is&nbsp;the&nbsp;default&nbsp;locations&nbsp;used&nbsp;by&nbsp;drawing&nbsp;functions.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+y:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;y&nbsp;location&nbsp;to&nbsp;set&nbsp;the&nbsp;graphics&nbsp;cursor&nbsp;to.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;y&nbsp;location&nbsp;of&nbsp;the&nbsp;graphics&nbsp;cursor.</tt></dd></dl>
+ <dl><dt><a name="-mouse_button"><strong>mouse_button</strong></a>(button_name)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;the&nbsp;state&nbsp;of&nbsp;a&nbsp;mouse&nbsp;button.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+button_name:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;button&nbsp;to&nbsp;be&nbsp;queried.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;number&nbsp;of&nbsp;frames&nbsp;the&nbsp;mouse&nbsp;button&nbsp;has&nbsp;been&nbsp;held&nbsp;down.</tt></dd></dl>
+ <dl><dt><a name="-mouse_movement"><strong>mouse_movement</strong></a>()<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;the&nbsp;movement&nbsp;of&nbsp;the&nbsp;mouse&nbsp;between&nbsp;frames.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;amount&nbsp;of&nbsp;movement&nbsp;in&nbsp;the&nbsp;x&nbsp;direction.<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;amount&nbsp;of&nbsp;movement&nbsp;in&nbsp;the&nbsp;y&nbsp;direction.</tt></dd></dl>
+ <dl><dt><a name="-mouse_movement_x"><strong>mouse_movement_x</strong></a>()<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;the&nbsp;x&nbsp;movement&nbsp;of&nbsp;the&nbsp;mouse&nbsp;between&nbsp;frames.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;amount&nbsp;of&nbsp;movement&nbsp;in&nbsp;the&nbsp;x&nbsp;direction.</tt></dd></dl>
+ <dl><dt><a name="-mouse_movement_y"><strong>mouse_movement_y</strong></a>()<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;the&nbsp;y&nbsp;movement&nbsp;of&nbsp;the&nbsp;mouse&nbsp;between&nbsp;frames.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;amount&nbsp;of&nbsp;movement&nbsp;in&nbsp;the&nbsp;y&nbsp;direction.</tt></dd></dl>
+ <dl><dt><a name="-mouse_position"><strong>mouse_position</strong></a>()<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;the&nbsp;mouse's&nbsp;current&nbsp;position.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;x&nbsp;location&nbsp;of&nbsp;the&nbsp;mouse.<br>
+int:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;y&nbsp;location&nbsp;of&nbsp;the&nbsp;mouse.</tt></dd></dl>
+ <dl><dt><a name="-mouse_x"><strong>mouse_x</strong></a>()<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;the&nbsp;mouse's&nbsp;current&nbsp;x&nbsp;position.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;x&nbsp;location&nbsp;of&nbsp;the&nbsp;mouse.</tt></dd></dl>
+ <dl><dt><a name="-mouse_y"><strong>mouse_y</strong></a>()<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;the&nbsp;mouse's&nbsp;current&nbsp;y&nbsp;position.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;y&nbsp;location&nbsp;of&nbsp;the&nbsp;mouse.</tt></dd></dl>
+ <dl><dt><a name="-now"><strong>now</strong></a>(start=0.0)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;seconds&nbsp;since&nbsp;micro.py's&nbsp;<a href="#-init">init</a>()&nbsp;function&nbsp;was&nbsp;called.<br>
+&nbsp;<br>
+Optionally&nbsp;can&nbsp;return&nbsp;the&nbsp;number&nbsp;of&nbsp;seconds&nbsp;since&nbsp;`start'.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+start:&nbsp;float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;starting&nbsp;point&nbsp;to&nbsp;measure&nbsp;from,&nbsp;the&nbsp;default&nbsp;is&nbsp;0.0&nbsp;which&nbsp;is&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;time&nbsp;<a href="#-init">init</a>()&nbsp;was&nbsp;called.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns<br>
+-------<br>
+float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;number&nbsp;of&nbsp;seconds.</tt></dd></dl>
+ <dl><dt><a name="-play_music"><strong>play_music</strong></a>(name, volume=1.0)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Plays&nbsp;the&nbsp;named&nbsp;background&nbsp;music.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+name:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;background&nbsp;music&nbsp;to&nbsp;play.<br>
+volume:&nbsp;float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;volume&nbsp;(0.0&nbsp;-&nbsp;1.0)&nbsp;to&nbsp;play&nbsp;the&nbsp;music&nbsp;at.</tt></dd></dl>
+ <dl><dt><a name="-play_sound"><strong>play_sound</strong></a>(name, volume=1.0)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Plays&nbsp;the&nbsp;named&nbsp;sound&nbsp;effect.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+name:&nbsp;str&nbsp;(resource&nbsp;name)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;sound&nbsp;to&nbsp;play.<br>
+volume:&nbsp;float<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;volume&nbsp;(0.0&nbsp;-&nbsp;1.0)&nbsp;to&nbsp;play&nbsp;the&nbsp;sound&nbsp;at.</tt></dd></dl>
+ <dl><dt><a name="-quit"><strong>quit</strong></a>()<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Release&nbsp;all&nbsp;resources&nbsp;allocated&nbsp;by&nbsp;micro.py&nbsp;and&nbsp;closes&nbsp;the&nbsp;graphics&nbsp;window.<br>
+&nbsp;<br>
+Notes<br>
+-----<br>
+This&nbsp;function&nbsp;is&nbsp;automatically&nbsp;called&nbsp;after&nbsp;<a href="#-init">init</a>()&nbsp;has&nbsp;been&nbsp;called.&nbsp;&nbsp;<br>
+However&nbsp;when&nbsp;running&nbsp;your&nbsp;scripts&nbsp;in&nbsp;IDLE,&nbsp;atexit&nbsp;handlers&nbsp;&nbsp;do&nbsp;not&nbsp;work&nbsp;<br>
+correctly,&nbsp;therefore&nbsp;it&nbsp;is&nbsp;highly&nbsp;advisable&nbsp;that&nbsp;you&nbsp;put&nbsp;a&nbsp;call&nbsp;to&nbsp;<a href="#-quit">quit</a>()&nbsp;<br>
+at&nbsp;the&nbsp;end&nbsp;of&nbsp;all&nbsp;programs&nbsp;that&nbsp;use&nbsp;micro.py.</tt></dd></dl>
+ <dl><dt><a name="-resolution"><strong>resolution</strong></a>(width=None, height=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;and&nbsp;optionally&nbsp;sets&nbsp;the&nbsp;screen&nbsp;resolution.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+width:&nbsp;int&nbsp;(greater&nbsp;than&nbsp;zero)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;width&nbsp;to&nbsp;set&nbsp;the&nbsp;screen&nbsp;resolution&nbsp;to.<br>
+height:&nbsp;int&nbsp;(greater&nbsp;than&nbsp;zero)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;height&nbsp;to&nbsp;set&nbsp;the&nbsp;screen&nbsp;resolution&nbsp;to.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;current&nbsp;width&nbsp;of&nbsp;screen&nbsp;resolution.<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;current&nbsp;height&nbsp;of&nbsp;the&nbsp;screen&nbsp;resolution.</tt></dd></dl>
+ <dl><dt><a name="-resolution_height"><strong>resolution_height</strong></a>(height=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;and&nbsp;optionally&nbsp;sets&nbsp;the&nbsp;height&nbsp;of&nbsp;the&nbsp;screen&nbsp;resolution.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+height:&nbsp;int&nbsp;(greater&nbsp;than&nbsp;zero)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;height&nbsp;to&nbsp;set&nbsp;the&nbsp;screen&nbsp;resolution&nbsp;to.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;current&nbsp;height&nbsp;of&nbsp;screen&nbsp;resolution.</tt></dd></dl>
+ <dl><dt><a name="-resolution_width"><strong>resolution_width</strong></a>(width=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;and&nbsp;optionally&nbsp;sets&nbsp;the&nbsp;width&nbsp;of&nbsp;the&nbsp;screen&nbsp;resolution.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+width:&nbsp;int&nbsp;(greater&nbsp;than&nbsp;zero)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;width&nbsp;to&nbsp;set&nbsp;the&nbsp;screen&nbsp;resolution&nbsp;to.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;current&nbsp;width&nbsp;of&nbsp;screen&nbsp;resolution.</tt></dd></dl>
+ <dl><dt><a name="-running"><strong>running</strong></a>(running=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;and&nbsp;optionally&nbsp;sets&nbsp;weather&nbsp;the&nbsp;game&nbsp;loop&nbsp;should&nbsp;continue&nbsp;running.<br>
+&nbsp;<br>
+Returns&nbsp;False&nbsp;when&nbsp;the&nbsp;escape&nbsp;key&nbsp;is&nbsp;pressed&nbsp;or&nbsp;the&nbsp;close&nbsp;button&nbsp;is&nbsp;pressed<br>
+on&nbsp;the&nbsp;graphics&nbsp;window.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+running:&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;running&nbsp;state&nbsp;to&nbsp;set.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Weather&nbsp;the&nbsp;game&nbsp;should&nbsp;continue&nbsp;running.</tt></dd></dl>
+ <dl><dt><a name="-stop_music"><strong>stop_music</strong></a>()<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Stops&nbsp;the&nbsp;currently&nbsp;playing&nbsp;background&nbsp;music.</tt></dd></dl>
+ <dl><dt><a name="-title"><strong>title</strong></a>(title=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Gets&nbsp;and&nbsp;optionally&nbsp;sets&nbsp;the&nbsp;title&nbsp;of&nbsp;the&nbsp;graphics&nbsp;window.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;text&nbsp;at&nbsp;the&nbsp;top&nbsp;of&nbsp;the&nbsp;graphics&nbsp;window,&nbsp;in&nbsp;the&nbsp;window&nbsp;managers<br>
+title&nbsp;bar.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+title:&nbsp;str<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;title&nbsp;to&nbsp;display&nbsp;in&nbsp;the&nbsp;title-bar&nbsp;of&nbsp;the&nbsp;graphics&nbsp;window.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+str:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;currently&nbsp;displayed&nbsp;title.</tt></dd></dl>
+ <dl><dt><a name="-update"><strong>update</strong></a>(target_fps=None)<font color="#909090"><font face="helvetica, arial"> method of MicroPyApi instance</font></font></dt><dd><tt>Updates&nbsp;the&nbsp;screen&nbsp;and&nbsp;reads&nbsp;the&nbsp;state&nbsp;of&nbsp;all&nbsp;input&nbsp;devices.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;must&nbsp;be&nbsp;called&nbsp;for&nbsp;anything&nbsp;to&nbsp;be&nbsp;displayed&nbsp;on<br>
+the&nbsp;screen,&nbsp;and&nbsp;called&nbsp;regularly&nbsp;for&nbsp;a&nbsp;program&nbsp;to&nbsp;remain<br>
+responsive&nbsp;to&nbsp;input.&nbsp;&nbsp;When&nbsp;a&nbsp;`target_fps'&nbsp;is&nbsp;specified&nbsp;a&nbsp;<br>
+small&nbsp;delay&nbsp;is&nbsp;added&nbsp;to&nbsp;the&nbsp;function&nbsp;to&nbsp;attempt&nbsp;to&nbsp;maintain<br>
+that&nbsp;frame-rate.<br>
+&nbsp;<br>
+Parameter<br>
+---------<br>
+target_fps:&nbsp;int&nbsp;(greater&nbsp;than&nbsp;zero)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;frame&nbsp;rate&nbsp;you&nbsp;want&nbsp;the&nbsp;game&nbsp;loop&nbsp;to&nbsp;run&nbsp;at.</tt></dd></dl>
+</td></tr></table>
+</body></html>
