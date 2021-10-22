@@ -514,7 +514,6 @@ def __init__():
             TTF_Init()
             Mix_Init(0)
 
-            #reorder assignments to be in same order as params
 
             if title is None:
                 title = os.path.splitext(os.path.basename(sys.argv[0]))[0]
@@ -901,7 +900,6 @@ def __init__():
             int
                 The x location of the graphics cursor.
             '''
-            #function needs implementing
 
             x, _ = location(x)
             return x
@@ -923,7 +921,6 @@ def __init__():
             int
                 The y location of the graphics cursor.
             '''
-            #function needs implementing
 
             _, y = location(y=y)
             return y
